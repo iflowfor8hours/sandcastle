@@ -1,0 +1,12 @@
+---
+- name: Update sshd config
+  copy:
+    src: files/sshd_config
+    dest: /etc/ssh/sshd_config
+    backup: yes
+    owner: 0
+    group: 0
+    mode: 0644
+    validate: '/usr/sbin/sshd -T -f %s'
+  notify:
+  - restart sshd

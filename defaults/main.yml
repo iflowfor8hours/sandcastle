@@ -1,0 +1,3 @@
+---
+sandstorm_hostname: "{{ansible_fqdn}}"
+sandstorm_port: 6080

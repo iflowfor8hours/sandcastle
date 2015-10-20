@@ -1,0 +1,43 @@
+---
+- name: Create sandstorm group
+  group:
+    name: sandstorm
+
+- name: Create sandstorm user
+  user:
+    name: sandstorm
+    group: sandstorm
+    createhome: no
+    system: yes
+
+- name: Modify vagrant user to run sandstorm commands
+  user:
+    name: vagrant
+    groups: sandstorm
+    append: yes
+
+- name: Fetch sandstorm installer
+  get_url:
+    url: https://install.sandstorm.io/
+    dest: /tmp/sandstorm.sh
+
+- name: chmod sandstorm installer
+  file:
+    name: /tmp/sandstorm.sh
+    mode: 755
+
+- name: Run sandstorm installer
+  command: /tmp/sandstorm.sh -d -e
+           creates=/opt/sandstorm
+
+- name: Configure sandstorm
+  template:
+    src: sandstorm.conf.j2
+    dest: /opt/sandstorm/sandstorm.conf
+  register: sandstorm_conf_updated
+
+- name: Start the sandstorm service
+  service:
+    name: sandstorm
+    state: restarted
+  when: sandstorm_conf_updated.changed

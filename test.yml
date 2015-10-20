@@ -1,0 +1,12 @@
+- hosts: all
+  sudo: true
+  pre_tasks:
+      - file: name="/etc/ssl" state=directory owner=www-data
+      - copy: src=test/sandstorm.crt dest=/etc/ssl/ssl_certificate.crt
+      - copy: src=test/sandstorm.key dest=/etc/ssl/ssl_certificate.key
+      - copy: src=test/rootCA.pem dest=/etc/ssl/rootCA.pem
+  roles:
+    - role: sandstorm-base
+      ssl_certificate_path: /etc/ssl/ssl_certificate.crt
+      ssl_certificate_key_path: /etc/ssl/ssl_certificate.key
+      ssl_trusted_certificate_path: /etc/ssl/rootCA.pem

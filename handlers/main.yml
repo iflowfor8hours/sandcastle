@@ -1,0 +1,8 @@
+---
+# handlers file for sandstorm-base
+- name: restart nginx
+  service: name=nginx state=restarted
+- name: restart sshd
+  service:
+    name: sshd
+    state: restarted
