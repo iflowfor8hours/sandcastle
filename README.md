@@ -42,9 +42,11 @@ You can test this role with Vagrant:
 
 * `$ ansible-galaxy install -p dependencies -r requirements.txt`
 * `$ cd test && ./gen-test-cert.sh`
-* Add `test/rootCA.pem` to your browsers trusted certs
+* Add `test/rootCA.pem` to your browsers trusted authorities list (**note!**
+  while this is added to your browser anyone with access to rootCA.pem will be
+  able to compromise your TLS connections)
 * `$ vagrant up`
-* Navigate to https://sandstorm.io.vagrant.dev
+* Navigate to [https://sandstorm.io.vagrant.dev]
 
 License
 -------
