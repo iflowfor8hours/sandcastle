@@ -40,11 +40,11 @@ See [test.yml](test.yml)
 
 You can test this role with Vagrant:
 
-```
-$ ansible-galaxy install -p dependencies -r requirements.txt
-$ vagrant up
-Navigate to https://sandstorm.io.vagrant.dev
-```
+* `$ ansible-galaxy install -p dependencies -r requirements.txt`
+* `$ cd test && ./gen-test-cert.sh`
+* Add `test/rootCA.pem` to your browsers trusted certs
+* `$ vagrant up`
+* Navigate to https://sandstorm.io.vagrant.dev
 
 License
 -------
