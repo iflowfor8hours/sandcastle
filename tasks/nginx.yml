@@ -39,6 +39,10 @@
     - /etc/nginx/conf.d/default.conf
     - /etc/nginx/conf.d/example_ssl.conf
 
+- name: add 502 handler that does not leak version info
+  copy:
+    dest: "/var/www/502.html"
+    content: "502: oops, something went wrong"
 
 - name: configure nginx reverse proxy
   template:

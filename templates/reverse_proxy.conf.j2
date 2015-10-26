@@ -48,6 +48,11 @@ server {
   # HSTS (15768000 seconds = 6 months)
   add_header Strict-Transport-Security max-age=15768000;
 
+  server_tokens off;
+
+  # Allow large spk uploads from the /install form and allow grains to receive large uploads.
+  client_max_body_size 256M;
+
   location / {
     proxy_pass http://127.0.0.1:{{ sandstorm_port }};
 
@@ -61,6 +66,8 @@ server {
     proxy_set_header Connection $connection_upgrade;
   }
 
-  # Allow large spk uploads from the /install form and allow grains to receive large uploads.
-  client_max_body_size 256M;
+  error_page 502 /502.html;
+  location = /502.html {
+    root  /var/www/;
+  }
 }
