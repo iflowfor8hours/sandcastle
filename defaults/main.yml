@@ -1,3 +1,4 @@
 ---
 sandstorm_hostname: "{{ansible_fqdn}}"
 sandstorm_port: 6080
+sandstorm_dev_accounts: false
