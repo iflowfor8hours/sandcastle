@@ -4,7 +4,7 @@ Sandstorm Base
 Secure by default Sandstorm installation with nginx reverse proxy and base
 Debian setup.
 
-Status: alpha, initial release, not to be depended on :)
+**Status**: alpha, initial release, not to be depended on :)
 
 Requirements
 ------------
@@ -29,15 +29,15 @@ for details on the SSL fields.
 Dependencies
 ------------
 
-jnv.unattended-upgrades
-geerlingguy.firewall
+* jnv.unattended-upgrades
+* geerlingguy.firewall
 
 Example Playbook
 ----------------
 
 See [test.yml](test.yml)
 
-You can test this role with Vagrant:
+You can see `test.yml` in action with Vagrant:
 
 * `$ ansible-galaxy install -p dependencies -r requirements.txt`
 * `$ cd test && ./gen-test-cert.sh`
