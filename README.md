@@ -45,6 +45,7 @@ You can see `test.yml` in action with Vagrant:
   while this is added to your browser anyone with access to rootCA.pem will be
   able to compromise your TLS connections)
 * `$ vagrant up`
+* If you don't have `vagrant-hostsupdater` installed, add `172.19.22.22  sandstorm.io.vagrant.dev` to your `/etc/hosts`
 * Navigate to https://sandstorm.io.vagrant.dev
 
 License
