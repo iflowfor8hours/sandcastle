@@ -16,16 +16,15 @@ A wildcard TLS certificate.
 Role Variables
 --------------
 
-sandstorm_hostname: defaults to {{ansible_fqdn}}
-sandstorm_port: defaults to 6080
-
-ssl_certificate_path: path provided to the nginx ssl_certificate config value
-ssl_certificate_key_path: path provided to the nginx ssl_certificate_key config value
-ssl_trusted_certificate_path: path provided to the nginx ssl_trusted_certificate config value
+* **sandstorm_hostname**: defaults to {{ansible_fqdn}}
+* **sandstorm_port**: defaults to 6080
+* **ssl_certificate_path**: path provided to the nginx ssl_certificate config value
+* **ssl_certificate_key_path**: path provided to the nginx ssl_certificate_key config value
+* **ssl_trusted_certificate_path**: path provided to the nginx ssl_trusted_certificate config value
 
 See the [nginx configuration
 docs](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate)
-for details on these fields.
+for details on the SSL fields.
 
 Dependencies
 ------------
