@@ -33,6 +33,7 @@ Dependencies
 
 * jnv.unattended-upgrades
 * geerlingguy.firewall
+* hardening.os-hardening
 
 Example Playbook
 ----------------
