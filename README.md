@@ -11,7 +11,7 @@ Requirements
 
 Root access to a Debian Jessie installation.
 
-A wildcard TLS certificate.
+A wildcard TLS certificate. (must be copied to the box before this role runs, see [test.yml](test.yml))
 
 Role Variables
 --------------
@@ -45,7 +45,7 @@ You can see `test.yml` in action with Vagrant:
   while this is added to your browser anyone with access to rootCA.pem will be
   able to compromise your TLS connections)
 * `$ vagrant up`
-* Navigate to [https://sandstorm.io.vagrant.dev]
+* Navigate to https://sandstorm.io.vagrant.dev
 
 License
 -------
@@ -55,7 +55,7 @@ MIT
 Author Information
 ------------------
 
-Matt Urbanski <iflowfor8hours>
-Charlie Austin <charltonaustin>
-Jack Singleton <jacksingleton>
+* Matt Urbanski (iflowfor8hours)
+* Charlie Austin (charltonaustin)
+* Jack Singleton (jacksingleton)
 
