@@ -132,3 +132,4 @@ galaxy_info:
 dependencies:
   - jnv.unattended-upgrades
   - geerlingguy.firewall
+  - hardening.os-hardening

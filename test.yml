@@ -7,7 +7,7 @@
       - copy: src=test/rootCA.pem dest=/etc/ssl/rootCA.pem
   roles:
     - role: sandstorm-base
-      sandstorm_dev_accounts: yes
+      sandstorm_dev_accounts: "yes"
       ssl_certificate_path: /etc/ssl/ssl_certificate.crt
       ssl_certificate_key_path: /etc/ssl/ssl_certificate.key
       ssl_trusted_certificate_path: /etc/ssl/rootCA.pem
