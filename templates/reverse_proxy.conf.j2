@@ -28,7 +28,9 @@ server {
   ssl_certificate_key {{ssl_certificate_key_path}};
 
   ssl_session_timeout 1d;
-  ssl_session_cache shared:SSL:50m;
+  ssl_session_cache shared:SSL:10m;
+
+  ssl_session_tickets off;
 
   # Diffie-Hellman parameter for DHE ciphersuites, recommended 2048 bits
   ssl_dhparam /etc/nginx/ssl/dhparam.pem;
