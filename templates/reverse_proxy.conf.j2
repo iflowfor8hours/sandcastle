@@ -27,7 +27,7 @@ server {
   ssl_certificate {{ssl_certificate_path}};
   ssl_certificate_key {{ssl_certificate_key_path}};
 
-  ssl_session_timeout 1d;
+  ssl_session_timeout 5m;
   ssl_session_cache shared:SSL:10m;
 
   ssl_session_tickets off;
