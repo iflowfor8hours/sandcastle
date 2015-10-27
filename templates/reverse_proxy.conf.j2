@@ -56,6 +56,9 @@ server {
 
   server_tokens off;
 
+  resolver 8.8.8.8 8.8.4.4 valid=300s;
+  resolver_timeout 5s;
+
   # Allow large spk uploads from the /install form and allow grains to receive large uploads.
   client_max_body_size 256M;
 
