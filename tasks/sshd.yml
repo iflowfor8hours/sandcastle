@@ -1,7 +1,17 @@
 ---
+
+- name: Create ed25519 (goodmode) host key
+  command: "ssh-keygen -N '' -t ed25519 -f {{ ssh_hostkey_path }}"
+  args:
+    creates: "{{ ssh_hostkey_path }}"
+  notify:
+    - restart sshd
+  tags:
+    - ssh
+
 - name: Update sshd config
-  copy:
-    src: sshd_config
+  template:
+    src: sshd_config.j2
     dest: /etc/ssh/sshd_config
     backup: yes
     owner: 0
@@ -10,3 +20,5 @@
     validate: '/usr/sbin/sshd -T -f %s'
   notify:
   - restart sshd
+  tags:
+    - ssh

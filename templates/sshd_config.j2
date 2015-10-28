@@ -1,0 +1,80 @@
+# Derived from:
+# * https://stribika.github.io/2015/01/04/secure-secure-shell.html
+# * https://github.com/hardening-io/ansible-ssh-hardening
+# * https://github.com/david415/ansible-openssh-hardened
+
+# Listen
+
+Port 22
+AddressFamily inet # only ipv4 for now
+ListenAddress 0.0.0.0
+
+# Cryptography
+
+Protocol 2
+HostKey {{ ssh_hostkey_path }}
+Ciphers chacha20-poly1305@openssh.com
+MACs hmac-sha2-256,hmac-sha2-512,hmac-sha1
+KexAlgorithms curve25519-sha256@libssh.org
+
+# Authentication
+
+PubkeyAuthentication yes
+PasswordAuthentication no
+PermitRootLogin without-password
+ChallengeResponseAuthentication no
+UseLogin no
+PermitUserEnvironment no
+LoginGraceTime 30s
+MaxAuthTries 2
+MaxSessions 10
+MaxStartups 10:30:100
+
+IgnoreRhosts yes
+IgnoreUserKnownHosts yes
+HostbasedAuthentication no
+RhostsRSAAuthentication no
+
+KerberosAuthentication no
+KerberosOrLocalPasswd no
+KerberosTicketCleanup yes
+
+GSSAPIAuthentication no
+GSSAPICleanupCredentials yes
+
+# Logging, obsoletes QuietMode and FascistLogging
+
+SyslogFacility AUTH
+LogLevel VERBOSE
+
+
+StrictModes yes
+UsePrivilegeSeparation yes
+X11Forwarding no
+X11UseLocalhost yes
+X11DisplayOffset 10
+PrintMotd no
+PrintLastLog no
+UsePAM no
+
+# Disable TCP keep alive since it is spoofable. Use ClientAlive messages
+# instead, they use the encrypted channel
+TCPKeepAlive no
+
+# Manage `ClientAlive..` signals via interval and maximum count. This will periodically check up to a `..CountMax` number of times within `..Interval` timeframe, and abort the connection once these fail.
+ClientAliveInterval 600
+ClientAliveCountMax 3
+
+# Disable tunneling
+PermitTunnel no
+
+# Disable forwarding tcp connections.
+# no real advantage without denied shell access
+AllowTcpForwarding no
+
+# Disable agent formwarding, since local agent could be accessed through forwarded connection.
+# no real advantage without denied shell access
+AllowAgentForwarding no
+
+# Do not allow remote port forwardings to bind to non-loopback addresses.
+GatewayPorts no

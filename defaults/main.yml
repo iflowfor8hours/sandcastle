@@ -2,3 +2,6 @@
 sandstorm_hostname: "{{ansible_fqdn}}"
 sandstorm_port: 6080
 sandstorm_dev_accounts: false
+
+ssh_hostkey_path: /etc/ssh/ssh_host_good_mode_key
+
