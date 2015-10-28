@@ -1,7 +1,7 @@
 ---
 - name: Update sshd config
   copy:
-    src: files/sshd_config
+    src: sshd_config
     dest: /etc/ssh/sshd_config
     backup: yes
     owner: 0
