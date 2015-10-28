@@ -6,8 +6,6 @@
     creates: "{{ ssh_hostkey_path }}"
   notify:
     - restart sshd
-  tags:
-    - ssh
 
 - name: Update sshd config
   template:
@@ -20,5 +18,3 @@
     validate: '/usr/sbin/sshd -T -f %s'
   notify:
   - restart sshd
-  tags:
-    - ssh

@@ -3,3 +3,5 @@
 - include: nginx.yml
 - include: sandstorm.yml
 - include: sshd.yml
+  tags:
+    - ssh

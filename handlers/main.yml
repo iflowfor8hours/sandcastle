@@ -6,3 +6,5 @@
   service:
     name: sshd
     state: restarted
+  tags:
+    - ssh
