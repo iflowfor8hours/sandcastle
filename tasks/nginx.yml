@@ -18,7 +18,7 @@
   file: name="{{ item }}" state=directory owner=www-data
   with_items:
     - "/etc/nginx/ssl"
-    - "/var/log/nginx/{{ ansible_fqdn }}"
+    - "/var/log/nginx/{{ sandstorm_hostname }}"
 
 - name: copy dh params
   copy:
