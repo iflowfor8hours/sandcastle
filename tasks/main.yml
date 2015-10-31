@@ -1,7 +1,5 @@
 ---
 # tasks file for sandstorm-base
-- include: nginx.yml
-- include: sandstorm.yml
-- include: sshd.yml
-  tags:
-    - ssh
+- include: nginx.yml tags=nginx
+- include: sandstorm.yml tags=sandstorm
+- include: sshd.yml tags=ssh
