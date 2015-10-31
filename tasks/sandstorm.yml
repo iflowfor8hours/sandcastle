@@ -1,16 +1,4 @@
 ---
-- name: Ensure we have exim4 so sandstorm can send login emails
-  apt: name=exim4
-
-- name: Configure exim4 to allow sending to internet and bind to 127.0.0.1
-  template:
-    src: update-exim4.conf.conf.j2
-    dest: /etc/exim4/update-exim4.conf.conf
-    mode: 0644
-
-- name: Update exim4 config
-  command: update-exim4.conf
-
 - name: Create sandstorm group
   group:
     name: sandstorm
