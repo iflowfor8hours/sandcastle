@@ -5,3 +5,7 @@ sandstorm_dev_accounts: false
 
 ssh_hostkey_path: /etc/ssh/ssh_host_good_mode_key
 
+firewall_allowed_tcp_ports:
+  - "22"
+  - "80"
+  - "443"
