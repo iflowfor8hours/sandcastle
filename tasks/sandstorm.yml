@@ -1,6 +1,6 @@
 ---
-- name: Install module dependencies
-  apt: name=curl
+- name: Ensure we have exim4 so sandstorm can send login emails
+  apt: name=exim4
 
 - name: Create sandstorm group
   group:
