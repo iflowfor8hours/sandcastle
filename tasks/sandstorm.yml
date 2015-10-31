@@ -1,4 +1,7 @@
 ---
+- name: Install module dependencies
+  apt: name=curl
+
 - name: Create sandstorm group
   group:
     name: sandstorm
