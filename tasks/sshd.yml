@@ -17,4 +17,4 @@
     mode: 0644
     validate: '/usr/sbin/sshd -T -f %s'
   notify:
-  - restart sshd
+    - restart sshd
