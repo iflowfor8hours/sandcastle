@@ -46,12 +46,12 @@ You can see `test.yml` in action with Vagrant:
   configuration that you need to get dnsmasq working, checkout [the
   docs](https://github.com/phinze/landrush#visibility-on-the-host) for more
   info)
-* `$ ansible-galaxy install -p dependencies -r requirements.txt`
-* `$ cd test && ./gen-test-cert.sh`
+* `ansible-galaxy install -p dependencies -r requirements.txt`
+* `cd test && ./gen-test-cert.sh`
 * Add `test/rootCA.pem` to your browsers trusted authorities list (**note!**
   while this is added to your browser anyone with access to rootCA.key will be
   able to compromise your TLS connections)
-* `$ vagrant up`
+* `vagrant up`
 * Navigate to https://sandstorm.io.vagrant.dev
 
 License
