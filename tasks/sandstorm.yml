@@ -20,6 +20,7 @@
   get_url:
     url: https://install.sandstorm.io/
     dest: /tmp/sandstorm.sh
+  when: sandstorm_verify_installer == false
 
 - name: chmod sandstorm installer
   file:

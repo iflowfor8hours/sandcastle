@@ -10,6 +10,10 @@
   tags: exim4
   when: not {{enable_mta}}
 
+- include: sandstorm-verify.yml
+  tags: sandstorm_verify
+  when: sandstorm_verify_installer
+
 - include: sandstorm.yml
   tags: sandstorm
 

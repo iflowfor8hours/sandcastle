@@ -1,0 +1,52 @@
+---
+- name: get sandstorm releases keyring
+  get_url:
+    url: https://raw.githubusercontent.com/sandstorm-io/sandstorm/master/keys/release-keyring.gpg
+    dest: /tmp/release-keyring.gpg
+
+- name: import sandstorm release keyring
+  shell: gpg --import /tmp/release-keyring.gpg
+
+- name: get kenton release key cert
+  get_url:
+    url: https://raw.githubusercontent.com/sandstorm-io/sandstorm/master/keys/release-certificate.kentonv.sig
+    dest: /tmp/release-certificate.kentonv.sig
+
+- name: verify certificate validity date
+  shell: gpg --decrypt /tmp/release-certificate.kentonv.sig
+  register: result
+
+- name: Verify installer cert validity date
+  debug: 
+    msg: 'Is the date {{ansible_date_time.date}} within the certificate validity dates stated in the following message?   {{result.stdout}}?'
+
+- name: Fetch sandstorm installer
+  get_url:
+    url: https://install.sandstorm.io/
+    dest: /tmp/sandstorm.sh
+
+- name: Fetch sandstorm installer signature
+  get_url:
+    url: https://install.sandstorm.io/install.sh.sig
+    dest: /tmp/sandstorm.sh.sig
+
+- name: verify installer signature
+  shell: gpg --verify /tmp/sandstorm.sh.sig /tmp/sandstorm.sh
+  #register: result
+
+#vars_prompt:
+#
+#  - name: read the above statement and verify its validity. confirm with Y
+#    prompt: "Is the {{ansible_date_time.date}} true?"
+#
+#- name: Configure sandstorm
+#  template:
+#    src: sandstorm.conf.j2
+#    dest: /opt/sandstorm/sandstorm.conf
+#  register: sandstorm_conf_updated
+#
+#- name: Start the sandstorm service
+#  service:
+#    name: sandstorm
+#    state: restarted
+#  when: sandstorm_conf_updated.changed

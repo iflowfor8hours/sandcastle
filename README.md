@@ -20,6 +20,7 @@ Role Variables
 * **sandstorm_port**: defaults to `6080`
 * **sandstorm_dev_accounts**: defaults to `"false"`, set to `"yes"` to enable
   (note: must be the string "yes", with quotes)
+* **sandstorm_verify_installer**: defaults to `false`, set to `true` to enable gpg verification of sandstorm installer
 * **enable_mta**: defaults to `"false"`, set to true to install
   and configure exim4. if left `false` we ensure that exim4 is
   stopped and remove it

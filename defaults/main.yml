@@ -2,6 +2,7 @@
 sandstorm_hostname: "{{ansible_fqdn}}"
 sandstorm_port: 6080
 sandstorm_dev_accounts: false
+sandstorm_verify_installer: false
 
 enable_mta: false
 
