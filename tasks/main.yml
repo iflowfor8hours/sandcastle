@@ -1,6 +1,20 @@
 ---
-- include: nginx.yml tags=nginx
-- include: exim4.yml tags=exim4
-- include: sandstorm.yml tags=sandstorm
-- include: sshd.yml tags=ssh
-- include: needrestart.yml tags=needrestart
+- include: nginx.yml
+  tags: nginx
+
+- include: exim4.yml
+  tags: exim4
+  when: "{{enable_mta}}"
+
+- include: remove-exim4.yml
+  tags: exim4
+  when: not {{enable_mta}}
+
+- include: sandstorm.yml
+  tags: sandstorm
+
+- include: sshd.yml
+  tags: ssh
+
+- include: needrestart.yml
+  tags: needrestart

@@ -1,0 +1,11 @@
+---
+- name: Stop exim4 if it is already running
+  service:
+    name=exim4
+    enabled=false
+    state=stopped
+
+- name: Uninstall exim4
+  apt:
+    name=exim4
+    state=absent
