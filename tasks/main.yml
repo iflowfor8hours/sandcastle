@@ -1,5 +1,4 @@
 ---
-# tasks file for sandstorm-base
 - include: nginx.yml tags=nginx
 - include: exim4.yml tags=exim4
 - include: sandstorm.yml tags=sandstorm
