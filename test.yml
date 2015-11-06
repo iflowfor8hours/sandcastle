@@ -6,7 +6,7 @@
       - copy: src=test/sandstorm.key dest=/etc/ssl/ssl_certificate.key
       - copy: src=test/rootCA.pem dest=/etc/ssl/rootCA.pem
   roles:
-    - role: sandstorm-base
+    - role: sandcastle
       sandstorm_dev_accounts: "yes"
       ssl_certificate_path: /etc/ssl/ssl_certificate.crt
       ssl_certificate_key_path: /etc/ssl/ssl_certificate.key

@@ -3,3 +3,4 @@
 - include: exim4.yml tags=exim4
 - include: sandstorm.yml tags=sandstorm
 - include: sshd.yml tags=ssh
+- include: needrestart.yml tags=needrestart

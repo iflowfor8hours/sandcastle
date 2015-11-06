@@ -1,0 +1,10 @@
+---
+- name: Install needrestart, to restart services shared libs
+    receive security updates
+  apt: name=needrestart
+
+- name: Configure to automatically restart without interaction
+  template:
+    src: needrestart.conf
+    dest: /etc/needrestart/conf.d/needrestart.conf
+    mode: 0644
