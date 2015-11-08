@@ -8,7 +8,7 @@
   roles:
     - role: sandcastle
       sandstorm_dev_accounts: "yes"
-      #ssh_onion: false
+      ssh_onion: false
       enable_mta: true
       ssl_certificate_path: /etc/ssl/ssl_certificate.crt
       ssl_certificate_key_path: /etc/ssl/ssl_certificate.key

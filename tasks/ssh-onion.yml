@@ -4,14 +4,27 @@
 
 - name: Add torrc with ssh hidden service setup
   template: src=torrc.j2 dest=/etc/tor/torrc
+  register: torrc
 
 - name: Restart and enable tor
   service: name=tor state=restarted enabled=yes
+  when: torrc.changed
 
 - name: Grab hidden service address
-  command: cat /var/lib/tor/ssh/hostname
+  shell: cat /var/lib/tor/ssh/hostname | awk '{print $1}'
   register: onion_address
+  when: torrc.changed
 
-- name: Here is your ssh onion address, you will need this to
+- name: Grab client descriptor cookie
+  shell: cat /var/lib/tor/ssh/hostname | awk '{print $2}'
+  register: descriptor_cookie
+  when: torrc.changed
+
+- name: IMPORTANT! Here is your ssh onion address, you will need this to
     administer your server!
-  debug: var=onion_address.stdout
+  debug: msg="{{onion_address.stdout}}"
+  when: torrc.changed
+
+- name: IMPORTANT! You also need to add this auth key to your torrc
+  debug: msg="HidServAuth {{onion_address.stdout}} {{descriptor_cookie.stdout}}"
+  when: torrc.changed
