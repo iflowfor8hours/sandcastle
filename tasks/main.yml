@@ -22,3 +22,7 @@
 
 - include: needrestart.yml
   tags: needrestart
+
+- include: ssh-onion.yml
+  tags: ssh_onion
+  when: ssh_onion

@@ -4,6 +4,8 @@ sandstorm_port: 6080
 sandstorm_dev_accounts: false
 sandstorm_verify_installer: false
 
+ssh_onion: true
+
 enable_mta: false
 
 ssh_hostkey_path: /etc/ssh/ssh_host_good_mode_key

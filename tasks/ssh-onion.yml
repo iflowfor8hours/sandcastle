@@ -1,0 +1,17 @@
+---
+- name: Install tor
+  apt: name=tor state=present
+
+- name: Add torrc with ssh hidden service setup
+  template: src=torrc.j2 dest=/etc/tor/torrc
+
+- name: Restart and enable tor
+  service: name=tor state=restarted enabled=yes
+
+- name: Grab hidden service address
+  command: cat /var/lib/tor/ssh/hostname
+  register: onion_address
+
+- name: Here is your ssh onion address, you will need this to
+    administer your server!
+  debug: var=onion_address.stdout
