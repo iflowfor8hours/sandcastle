@@ -12,6 +12,7 @@ map $http_upgrade $connection_upgrade {
   ''      close;
 }
 
+
 # Configuration for Sandstorm shell.
 server {
   listen 443 ssl;
@@ -80,3 +81,52 @@ server {
     root  /var/www/;
   }
 }
+
+
+{% if sandstorm_onion %}
+# Configuration for Sandstorm Onion
+server {
+  listen 127.0.0.1:8080;
+
+  error_log /var/log/nginx/sandstorm_onion_proxy/error.log;
+  access_log /var/log/nginx/sandstorm_onion_proxy/access.log;
+
+  add_header X-XSS-Protection "1; mode=block";
+  add_header X-Content-Type-Options nosniff;
+  add_header X-Download-Options noopen;
+
+  server_tokens off;
+
+  # TODO: do we need to set a resolver?
+  #resolver 8.8.8.8 8.8.4.4 valid=300s;
+  #resolver_timeout 5s;
+
+  # Allow large spk uploads from the /install form and allow grains to receive large uploads.
+  client_max_body_size 256M;
+
+  location / {
+    proxy_pass http://127.0.0.1:{{ sandstorm_port }};
+
+    # This allows access to the sandstorm shell, but not the
+    # grains because sandstorm uses the configured
+    # BASE_URL/WILDCARD_HOST to configure the iframes. looks like
+    # we really need support for multiple BASE_URL/WILDCARD_HOST
+    # entries
+    proxy_set_header Host {{ sandstorm_hostname }};
+
+    # Forward the Host header, which is used to route requests for
+    # static content published from Sandstorm apps.
+    proxy_set_header Host $http_host;
+
+    # Forward WebSocket.
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+  }
+
+  error_page 502 /502.html;
+  location = /502.html {
+    root  /var/www/;
+  }
+}
+{% endif %}

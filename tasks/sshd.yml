@@ -1,5 +1,4 @@
 ---
-
 - name: Create ed25519 (goodmode) host key
   command: "ssh-keygen -N '' -t ed25519 -f {{ ssh_hostkey_path }}"
   args:

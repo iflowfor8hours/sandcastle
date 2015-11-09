@@ -8,7 +8,7 @@
 Port 22
 AddressFamily inet # only ipv4 for now
 
-ListenAddress {{ '127.0.0.1' if ssh_onion else '0.0.0.0' }}
+ListenAddress {{ '127.0.0.1' if ssh_onion and not ssh_debug else '0.0.0.0' }}
 
 # Cryptography
 

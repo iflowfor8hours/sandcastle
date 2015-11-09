@@ -22,12 +22,16 @@ Role Variables
   (note: must be the string "yes", with quotes)
 * **sandstorm_verify_installer**: defaults to `false`, set to
   `true` to enable gpg verification of sandstorm installer
+* **sandstorm_onion**: defaults to `false` for now. still work in progress
 * **enable_mta**: defaults to `"false"`, set to true to install
   and configure exim4. if left `false` we ensure that exim4 is
   stopped and remove it
 * **ssh_onion**: defaults to `true`. only allow ssh access through
   a tor hidden service (tor and ssh client setup required, see
   https://stribika.github.io/2015/01/04/secure-secure-shell.html#traffic-analysis-resistance)
+* **ssh_debug**: defaults to `false`. always bind ssh to `0.0.0.0`, even if ssh_onion is `true`
+* **firewall_allowed_tcp_ports**: defaults to `[80, 443]`. add
+  `22` if you want to ssh directly instead of through Tor
 * **ssl_certificate_path**: path provided to the nginx ssl_certificate config value
 * **ssl_certificate_key_path**: path provided to the nginx ssl_certificate_key config value
 * **ssl_trusted_certificate_path**: path provided to the nginx ssl_trusted_certificate config value

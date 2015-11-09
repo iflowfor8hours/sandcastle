@@ -10,21 +10,21 @@
   service: name=tor state=restarted enabled=yes
   when: torrc.changed
 
-- name: Grab hidden service address
+- name: Grab ssh onion address
   shell: cat /var/lib/tor/ssh/hostname | awk '{print $1}'
   register: onion_address
-  when: torrc.changed
+  when: ssh_onion and torrc.changed
 
-- name: Grab client descriptor cookie
+- name: Grab ssh client descriptor cookie
   shell: cat /var/lib/tor/ssh/hostname | awk '{print $2}'
   register: descriptor_cookie
-  when: torrc.changed
+  when: ssh_onion and torrc.changed
 
 - name: IMPORTANT! Here is your ssh onion address, you will need this to
     administer your server!
   debug: msg="{{onion_address.stdout}}"
-  when: torrc.changed
+  when: ssh_onion and torrc.changed
 
 - name: IMPORTANT! You also need to add this auth key to your torrc
   debug: msg="HidServAuth {{onion_address.stdout}} {{descriptor_cookie.stdout}}"
-  when: torrc.changed
+  when: ssh_onion and torrc.changed

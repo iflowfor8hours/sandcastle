@@ -1,8 +1,17 @@
 SocksPort 0
+RunAsDaemon 1
+Sandbox 1
 
+{% if ssh_onion %}
 HiddenServiceDir /var/lib/tor/ssh/
 HiddenServicePort 22 127.0.0.1:22
 HiddenServiceAuthorizeClient stealth ssh
+{% endif %}
+
+{% if sandstorm_onion %}
+HiddenServiceDir /var/lib/tor/sandstorm/
+HiddenServicePort 80 127.0.0.1:8080
+{% endif %}
 
 ## Configuration file for a typical Tor user
 ## Last updated 9 October 2013 for Tor 0.2.5.2-alpha.
