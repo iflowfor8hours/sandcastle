@@ -1,4 +1,4 @@
-Sandstorm Base
+Sandcastle
 =========
 
 Secure by default Sandstorm installation with nginx reverse proxy and base
