@@ -20,6 +20,12 @@
     - "/etc/nginx/ssl"
     - "/var/log/nginx/{{ sandstorm_hostname }}"
 
+- name: create onion nginx dirs
+  file: name="{{ item }}" state=directory owner=www-data
+  when: sandstorm_onion
+  with_items:
+    - "/var/log/nginx/sandstorm_onion_proxy"
+
 - name: copy dh params
   copy:
     src: dhparam.pem
