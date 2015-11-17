@@ -25,7 +25,7 @@ Role Variables
 * **sandstorm_onion**: defaults to `false` for now. still work in progress
 * **enable_mta**: defaults to `"false"`, set to true to install
   and configure exim4. if left `false` we ensure that exim4 is
-  stopped and remove it
+  stopped and remove it. Do not enable if you are using `sandstorm_onion`. First, doing so would expose the IP address of your server and second, when the Sandstorm hidden service is enabled DNS queries are routed through Tor, which does not return MX records. 
 * **ssh_onion**: defaults to `true`. only allow ssh access through
   a tor hidden service (tor and ssh client setup required, see
   https://stribika.github.io/2015/01/04/secure-secure-shell.html#traffic-analysis-resistance)
