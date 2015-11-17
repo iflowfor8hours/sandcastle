@@ -29,11 +29,6 @@
   register: sandstorm_onion_address
   when: sandstorm_onion and torrc.changed
 
-- name: Grab sandstorm client descriptor cookie
-  shell: cat /var/lib/tor/sandstorm/hostname | awk '{print $2}'
-  register: sandstorm_descriptor_cookie
-  when: sandstorm_onion and torrc.changed
-
 - name: IMPORTANT! Here is your ssh onion address, you will need this to
     administer your server!
   debug: msg="{{onion_address.stdout}}"
@@ -44,10 +39,6 @@
   when: ssh_onion and torrc.changed
 
 - name: IMPORTANT! Here is your sandstorm onion address, you will need this to
-    administer your server!
+    access your Sandstorm server!
   debug: msg="{{sandstorm_onion_address.stdout}}"
-  when: sandstorm_onion and torrc.changed
-
-- name: IMPORTANT! You also need to add this auth key to your torrc
-  debug: msg="HidServAuth {{sandstorm_onion_address.stdout}} {{sandstorm_descriptor_cookie.stdout}}"
   when: sandstorm_onion and torrc.changed
