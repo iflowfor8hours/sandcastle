@@ -64,7 +64,7 @@ You can see `test.yml` in action with Vagrant:
   while this is added to your browser anyone with access to rootCA.key will be
   able to compromise your TLS connections)
 * `vagrant up`
-* Navigate to https://sandstorm.io.vagrant.dev
+* Navigate to https://sandstorm.172.19.22.22.xip.io/
 
 License
 -------

@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--usbehci", "off"]
   end
 
-  config.vm.hostname = 'sandstorm.io.vagrant.dev'
+  config.vm.hostname = 'sandstorm.172.19.22.22.xip.io'
   config.vm.network "private_network", ip: "172.19.22.22"
 
   config.vm.provision :ansible do |ansible|

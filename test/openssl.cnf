@@ -362,5 +362,5 @@ keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1 = sandstorm.io.vagrant.dev
-DNS.2 = *.sandstorm.io.vagrant.dev
+DNS.1 = sandstorm.172.19.22.22.xip.io
+DNS.2 = *.sandstorm.172.19.22.22.xip.io
