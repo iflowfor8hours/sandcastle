@@ -54,10 +54,6 @@ See [test.yml](test.yml)
 
 You can see `test.yml` in action with Vagrant:
 
-* `vagrant plugin install landrush` (on linux there is some additional
-  configuration that you need to get dnsmasq working, checkout [the
-  docs](https://github.com/phinze/landrush#visibility-on-the-host) for more
-  info)
 * `ansible-galaxy install -p dependencies -r requirements.txt`
 * `cd test && ./gen-test-cert.sh`
 * Add `test/rootCA.pem` to your browsers trusted authorities list (**note!**
