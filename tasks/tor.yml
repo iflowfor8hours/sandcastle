@@ -10,6 +10,10 @@
   service: name=tor state=restarted enabled=yes
   when: torrc.changed
 
+- name: Update /etc/resolv.conf to point to Tor
+  template: src=resolv.conf.j2 dest=/etc/resolv.conf
+  when: tor_isolate_dns and torrc.changed
+
 - name: Grab ssh onion address
   shell: cat /var/lib/tor/ssh/hostname | awk '{print $1}'
   register: onion_address

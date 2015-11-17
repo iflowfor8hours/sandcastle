@@ -2,6 +2,10 @@ SocksPort 0
 RunAsDaemon 1
 Sandbox 1
 
+{% if tor_isolate_dns %}
+DNSPort 53
+{% endif %}
+
 {% if ssh_onion %}
 HiddenServiceDir /var/lib/tor/ssh/
 HiddenServicePort 22 127.0.0.1:22
