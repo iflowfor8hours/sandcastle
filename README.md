@@ -17,6 +17,9 @@ Role Variables
 --------------
 
 * **sandstorm_hostname**: defaults to `{{ansible_fqdn}}`
+* **sandstorm_wildcard_host**: defaults to
+  `*.{{sandstorm_hostname}}`, lets us change `WILDCARD_HOST` in
+  `sandstorm.conf`
 * **sandstorm_port**: defaults to `6080`
 * **sandstorm_dev_accounts**: defaults to `"false"`, set to `"yes"` to enable
   (note: must be the string "yes", with quotes)

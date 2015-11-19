@@ -16,7 +16,7 @@ map $http_upgrade $connection_upgrade {
 # Configuration for Sandstorm shell.
 server {
   listen 443 ssl;
-  server_name {{ sandstorm_hostname }} *.{{ sandstorm_hostname }};
+  server_name {{ sandstorm_hostname }} {{ sandstorm_wildcard_host }};
 
   error_log /var/log/nginx/{{ sandstorm_hostname }}/error.log;
   access_log /var/log/nginx/{{ sandstorm_hostname }}/access.log;
