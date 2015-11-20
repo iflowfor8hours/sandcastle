@@ -1,0 +1,21 @@
+---
+- name: add ipv6.disable=1 to grub command line
+  lineinfile:
+    dest: /etc/default/grub
+    backrefs: yes
+    regexp: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet ipv6.disable=1"'
+  register: grubcommandline
+
+- name: update grub
+  command: update-grub
+  when: grubcommandline.changed
+
+- name: restart server with 1 minute delay
+  command: shutdown -r 1
+  when: grubcommandline.changed
+
+- name: waiting for server to become available
+  sudo: false
+  local_action: wait_for port="{{ ansible_ssh_port | default(22) }}" host="{{ ansible_ssh_host | default(inventory_hostname) }}" search_regex=OpenSSH delay=75
+  when: grubcommandline.changed

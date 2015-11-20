@@ -29,3 +29,6 @@
 - include: tor.yml
   tags: tor
   when: ssh_onion or sandstorm_onion
+
+- include: disable-ipv6.yml
+  tags: ipv6
