@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -e
+cd $(dirname $0)
+
 openssl genrsa -out rootCA.key 4096
 
 openssl req -x509 -new -nodes -key rootCA.key -days 3650 -out rootCA.pem <<EOF
