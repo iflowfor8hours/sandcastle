@@ -5,6 +5,9 @@
       - copy: src=test/sandstorm.crt dest=/etc/ssl/ssl_certificate.crt
       - copy: src=test/sandstorm.key dest=/etc/ssl/ssl_certificate.key
       - copy: src=test/rootCA.pem dest=/etc/ssl/rootCA.pem
+      - file: name="/var/gpg" state=directory
+      - copy: src=test/backup-encryption-public.key dest=/var/gpg
+      - copy: src=test/backup-signing-private.key dest=/var/gpg
   roles:
     - role: sandcastle
       sandstorm_dev_accounts: "yes"

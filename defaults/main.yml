@@ -34,3 +34,5 @@ fail2ban_config_destemail: root@localhost
 
 fail2ban_config_jail_ssh_enabled: yes
 fail2ban_config_jail_sshddos_enabled: yes
+
+backups: yes

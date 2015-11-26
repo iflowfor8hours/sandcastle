@@ -59,6 +59,7 @@ You can see `test.yml` in action with Vagrant:
 
 * `ansible-galaxy install -p dependencies -r requirements.txt`
 * `cd test && ./gen-test-cert.sh`
+* `./test/gen-duplicity-keys.sh`
 * Add `test/rootCA.pem` to your browsers trusted authorities list (**note!**
   while this is added to your browser anyone with access to rootCA.key will be
   able to compromise your TLS connections)
