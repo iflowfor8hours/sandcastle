@@ -2,14 +2,22 @@
 - name: Create gpg home
   file: name="/var/gpg" state=directory owner=sandstorm mode=0700
 
-- name: install dependencies
+- name: Install dependencies
   apt: name={{item}} state=present
   with_items:
     - gnupg
     - duplicity
 
-- name: import backup encryption key
+- name: Import backup encryption key
   command: sudo -u sandstorm gpg --homedir /var/gpg --import /var/gpg/backup-encryption-public.key
 
-- name: import signing key
+- name: Import signing key
   command: sudo -u sandstorm gpg --homedir /var/gpg --import /var/gpg/backup-signing-private.key
+
+#- name: Add crontab entry for duplicity
+#  cron:
+#    name="backup sandstorm"
+#    hour=23
+#    user="sandstorm"
+#    job="/bin/backup-sandstorm"
+#    cron_file=backup-sandstorm
