@@ -22,3 +22,5 @@
       ssl_certificate_path: /etc/ssl/ssl_certificate.crt
       ssl_certificate_key_path: /etc/ssl/ssl_certificate.key
       ssl_trusted_certificate_path: /etc/ssl/rootCA.pem
+      backup_target: file:///tmp/backup
+      backup_target_password: SUPERTRASH

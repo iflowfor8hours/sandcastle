@@ -32,10 +32,10 @@
 - name: add backup script
   template: src=backup-sandstorm.j2 dest=/usr/local/bin/backup-sandstorm mode=a+x
 
-#- name: Add crontab entry for duplicity
-#  cron:
-#    name="backup sandstorm"
-#    hour=23
-#    user="sandstorm"
-#    job="/bin/backup-sandstorm"
-#    cron_file=backup-sandstorm
+- name: add crontab entry for duplicity
+  cron:
+    name="backup sandstorm"
+    hour=23
+    user="sandstorm"
+    job="/usr/local/bin/backup-sandstorm"
+    cron_file=backup-sandstorm
