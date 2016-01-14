@@ -8,6 +8,8 @@
       - file: name="/var/gpg" state=directory
       - copy: src=test/backup-encryption-public.key dest=/var/gpg
       - copy: src=test/backup-signing-private.key dest=/var/gpg
+  vars_files:
+      - test/vars.yml
   roles:
     - role: sandcastle
       sandstorm_dev_accounts: "yes"

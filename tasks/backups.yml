@@ -8,11 +8,26 @@
     - gnupg
     - duplicity
 
+- name: Check for backup encryption key
+  command: sudo -u sandstorm gpg --homedir /var/gpg --list-keys {{backup_encryption_key_id}}
+  ignore_errors: True
+  register: backup_encryption_key_exists
+
 - name: Import backup encryption key
   command: sudo -u sandstorm gpg --homedir /var/gpg --import /var/gpg/backup-encryption-public.key
+  when: not backup_encryption_key_exists.rc == 0
+
+- name: Check for backup signing key
+  command: sudo -u sandstorm gpg --homedir /var/gpg --list-keys {{backup_encryption_key_id}}
+  ignore_errors: True
+  register: backup_signing_key_exists
 
 - name: Import signing key
   command: sudo -u sandstorm gpg --homedir /var/gpg --import /var/gpg/backup-signing-private.key
+  when: not backup_signing_key_exists.rc == 0
+
+- name: add backup script
+  template: src=backup-sandstorm.j2 dest=/usr/local/bin/backup-sandstorm mode=a+x
 
 #- name: Add crontab entry for duplicity
 #  cron:

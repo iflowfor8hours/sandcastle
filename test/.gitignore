@@ -1,5 +1,7 @@
 *.key
+*.key-id
 *.pem
 *.srl
 *.crt
 *.csr
+vars.yml
