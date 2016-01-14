@@ -2,6 +2,9 @@
 - name: Create gpg home
   file: name="/var/gpg" state=directory owner=sandstorm mode=0700
 
+- name: Create duplicity archive directory
+  file: name="/var/duplicity-archive" state=directory owner=sandstorm mode=0700
+
 - name: Install dependencies
   apt: name={{item}} state=present
   with_items:
