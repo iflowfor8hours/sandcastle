@@ -27,8 +27,8 @@ ChallengeResponseAuthentication no
 UseLogin no
 PermitUserEnvironment no
 LoginGraceTime 30s
-MaxAuthTries 2
-MaxSessions 10
+MaxAuthTries 1
+MaxSessions 2
 MaxStartups 10:30:100
 
 IgnoreRhosts yes
@@ -55,7 +55,7 @@ X11Forwarding no
 X11UseLocalhost yes
 X11DisplayOffset 10
 PrintMotd no
-PrintLastLog no
+PrintLastLog yes
 UsePAM no
 
 # Disable TCP keep alive since it is spoofable. Use ClientAlive messages
@@ -63,8 +63,8 @@ UsePAM no
 TCPKeepAlive no
 
 # Manage `ClientAlive..` signals via interval and maximum count. This will periodically check up to a `..CountMax` number of times within `..Interval` timeframe, and abort the connection once these fail.
-ClientAliveInterval 600
-ClientAliveCountMax 3
+ClientAliveInterval 300
+ClientAliveCountMax 2
 
 # Disable tunneling
 PermitTunnel no
