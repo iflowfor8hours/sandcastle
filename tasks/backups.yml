@@ -1,9 +1,9 @@
 ---
 - name: Create gpg home
-  file: name="/var/gpg" state=directory owner=sandstorm mode=0700
+  file: name="/var/gpg" state=directory owner=root mode=0700
 
 - name: Create duplicity archive directory
-  file: name="/var/duplicity-archive" state=directory owner=sandstorm mode=0700
+  file: name="/var/duplicity-archive" state=directory owner=root mode=0700
 
 - name: Install dependencies
   apt: name={{item}} state=present
@@ -12,21 +12,21 @@
     - duplicity
 
 - name: Check for backup encryption key
-  command: sudo -u sandstorm gpg --homedir /var/gpg --list-keys {{backup_encryption_key_id}}
+  command: sudo -u root gpg --homedir /var/gpg --list-keys {{backup_encryption_key_id}}
   ignore_errors: True
   register: backup_encryption_key_exists
 
 - name: Import backup encryption key
-  command: sudo -u sandstorm gpg --homedir /var/gpg --import /var/gpg/backup-encryption-public.key
+  command: sudo -u root gpg --homedir /var/gpg --import /var/gpg/backup-encryption-public.key
   when: not backup_encryption_key_exists.rc == 0
 
 - name: Check for backup signing key
-  command: sudo -u sandstorm gpg --homedir /var/gpg --list-keys {{backup_signing_key_id}}
+  command: sudo -u root gpg --homedir /var/gpg --list-keys {{backup_signing_key_id}}
   ignore_errors: True
   register: backup_signing_key_exists
 
 - name: Import signing key
-  command: sudo -u sandstorm gpg --homedir /var/gpg --import /var/gpg/backup-signing-private.key
+  command: sudo -u root gpg --homedir /var/gpg --import /var/gpg/backup-signing-private.key
   when: not backup_signing_key_exists.rc == 0
 
 - name: add backup script
@@ -36,6 +36,6 @@
   cron:
     name="backup sandstorm"
     hour=23
-    user="sandstorm"
+    user="root"
     job="/usr/local/bin/backup-sandstorm"
     cron_file=backup-sandstorm
