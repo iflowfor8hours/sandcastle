@@ -21,7 +21,7 @@
   when: not backup_encryption_key_exists.rc == 0
 
 - name: Check for backup signing key
-  command: sudo -u sandstorm gpg --homedir /var/gpg --list-keys {{backup_encryption_key_id}}
+  command: sudo -u sandstorm gpg --homedir /var/gpg --list-keys {{backup_signing_key_id}}
   ignore_errors: True
   register: backup_signing_key_exists
 
