@@ -50,8 +50,8 @@
 - name: add crontab entry for duplicity
   cron:
     name="backup sandstorm"
-    hour=23
-    minute=0
+    hour={{backup_hour}}
+    minute={{backup_minute}}
     user="root"
     job="/usr/local/bin/backup-sandstorm"
     cron_file=backup-sandstorm

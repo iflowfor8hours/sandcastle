@@ -49,6 +49,8 @@ Role Variables
 * **backup_target_password**: if your backup target needs a password
 * **backup_encryption_key_id**: the key id of the gpg key to use to encrypt backups
 * **backup_signing_key_id**: the key id of the gpg key to use to sign backups
+* **backup_hour**: hour of the day to run the backup
+* **backup_minute**: minute of the hour to run the backup
 
 See `test/gen-duplicity-keys.sh` for an example of generating the backup keys.
 
