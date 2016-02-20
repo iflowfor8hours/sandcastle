@@ -51,6 +51,7 @@
   cron:
     name="backup sandstorm"
     hour=23
+    minute=0
     user="root"
     job="/usr/local/bin/backup-sandstorm"
     cron_file=backup-sandstorm
