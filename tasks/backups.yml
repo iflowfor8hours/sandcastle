@@ -1,15 +1,26 @@
 ---
-- name: Create gpg home
-  file: name="/var/gpg" state=directory owner=root mode=0700
-
-- name: Create duplicity archive directory
-  file: name="/var/duplicity-archive" state=directory owner=root mode=0700
+- name: Create duplicity directories
+  file:
+    name="{{item}}"
+    state=directory
+    owner=root
+    mode=0700
+  with_items:
+    - "/var/gpg"
+    - "/var/duplicity-archive"
+    - "/etc/duplicity"
 
 - name: Install dependencies
   apt: name={{item}} state=present
   with_items:
     - gnupg
     - duplicity
+
+- name: Give duplicity ssl certificates to trust
+  file:
+    src=/etc/ssl/certs/ca-certificates.crt
+    dest=/etc/duplicity/cacert.pem
+    state=link
 
 - name: Check for backup encryption key
   command: gpg --homedir /var/gpg --list-keys {{backup_encryption_key_id}}
