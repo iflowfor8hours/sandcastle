@@ -12,21 +12,25 @@
     - duplicity
 
 - name: Check for backup encryption key
-  command: sudo -u root gpg --homedir /var/gpg --list-keys {{backup_encryption_key_id}}
+  command: gpg --homedir /var/gpg --list-keys {{backup_encryption_key_id}}
   ignore_errors: True
+  become_user: root
   register: backup_encryption_key_exists
 
 - name: Import backup encryption key
-  command: sudo -u root gpg --homedir /var/gpg --import /var/gpg/backup-encryption-public.key
+  command: gpg --homedir /var/gpg --import /var/gpg/backup-encryption-public.key
+  become_user: root
   when: not backup_encryption_key_exists.rc == 0
 
 - name: Check for backup signing key
-  command: sudo -u root gpg --homedir /var/gpg --list-keys {{backup_signing_key_id}}
+  command: gpg --homedir /var/gpg --list-keys {{backup_signing_key_id}}
   ignore_errors: True
+  become_user: root
   register: backup_signing_key_exists
 
 - name: Import signing key
-  command: sudo -u root gpg --homedir /var/gpg --import /var/gpg/backup-signing-private.key
+  command: gpg --homedir /var/gpg --import /var/gpg/backup-signing-private.key
+  become_user: root
   when: not backup_signing_key_exists.rc == 0
 
 - name: add backup script
