@@ -30,6 +30,7 @@ Role Variables
 * **sandstorm_onion**: defaults to `false` for now. still work in progress
 
 ### SSH
+
 * **ssh_onion**: defaults to `true`. only allow ssh access through
   a tor hidden service (tor and ssh client setup required, see
   https://stribika.github.io/2015/01/04/secure-secure-shell.html#traffic-analysis-resistance)
@@ -43,7 +44,8 @@ Role Variables
 
 ### Backups
 
-* **backup_target**: backup target for `duplicity` (see the [duplicity docs](http://duplicity.nongnu.org/duplicity.1.html#sect7)
+* **backup_target**: backup target for `duplicity` (see the [duplicity
+  docs](http://duplicity.nongnu.org/duplicity.1.html#sect7))
 * **backup_target_password**: if your backup target needs a password
 * **backup_encryption_key_id**: the key id of the gpg key to use to encrypt backups
 * **backup_signing_key_id**: the key id of the gpg key to use to sign backups
