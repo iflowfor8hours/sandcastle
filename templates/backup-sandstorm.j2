@@ -11,7 +11,7 @@ systemctl stop sandstorm
 
 echo 'Making backup...'
 duplicity /opt/sandstorm/ {{ backup_target }} \
-  --allow-source-mismatch \ # duplicity is weird about hostnames
+  --allow-source-mismatch \
   --encrypt-key={{ backup_encryption_key_id }} \
   --sign-key={{ backup_signing_key_id }} \
   --archive-dir /var/duplicity-archive \
