@@ -16,6 +16,8 @@ A wildcard TLS certificate. (must be copied to the box before this role runs, se
 Role Variables
 --------------
 
+### Sandstorm
+
 * **sandstorm_hostname**: defaults to `{{ansible_fqdn}}`
 * **sandstorm_wildcard_host**: defaults to
   `*.{{sandstorm_hostname}}`, lets us change `WILDCARD_HOST` in
@@ -26,18 +28,39 @@ Role Variables
 * **sandstorm_verify_installer**: defaults to `false`, set to
   `true` to enable gpg verification of sandstorm installer
 * **sandstorm_onion**: defaults to `false` for now. still work in progress
-* **enable_mta**: defaults to `"false"`, set to true to install
-  and configure exim4. if left `false` we ensure that exim4 is
-  stopped and remove it. Do not enable if you are using `sandstorm_onion`. First, doing so would expose the IP address of your server and second, when the Sandstorm hidden service is enabled DNS queries are routed through Tor, which does not return MX records. 
+
+### SSH
 * **ssh_onion**: defaults to `true`. only allow ssh access through
   a tor hidden service (tor and ssh client setup required, see
   https://stribika.github.io/2015/01/04/secure-secure-shell.html#traffic-analysis-resistance)
 * **ssh_debug**: defaults to `false`. always bind ssh to `0.0.0.0`, even if ssh_onion is `true`
-* **firewall_allowed_tcp_ports**: defaults to `[80, 443]`. add
-  `22` if you want to ssh directly instead of through Tor
+
+### Nginx
+
 * **ssl_certificate_path**: path provided to the nginx ssl_certificate config value
 * **ssl_certificate_key_path**: path provided to the nginx ssl_certificate_key config value
 * **ssl_trusted_certificate_path**: path provided to the nginx ssl_trusted_certificate config value
+
+### Backups
+
+* **backup_target**: backup target for `duplicity` (see the [duplicity docs](http://duplicity.nongnu.org/duplicity.1.html#sect7)
+* **backup_target_password**: if your backup target needs a password
+* **backup_encryption_key_id**: the key id of the gpg key to use to encrypt backups
+* **backup_signing_key_id**: the key id of the gpg key to use to sign backups
+
+See `test/gen-duplicity-keys.sh` for an example of generating the backup keys.
+
+### Other
+
+* **firewall_allowed_tcp_ports**: defaults to `[80, 443]`. add
+  `22` if you want to ssh directly instead of through Tor
+
+* **enable_mta**: defaults to `"false"`, set to true to install
+  and configure exim4. if left `false` we ensure that exim4 is
+  stopped and remove it. Do not enable if you are using `sandstorm_onion`.
+  First, doing so would expose the IP address of your server and second, when
+  the Sandstorm hidden service is enabled DNS queries are routed through Tor,
+  which does not return MX records. 
 
 See the [nginx configuration
 docs](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate)
