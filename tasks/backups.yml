@@ -45,7 +45,10 @@
   when: not backup_signing_key_exists.rc == 0
 
 - name: add backup script
-  template: src=backup-sandstorm.j2 dest=/usr/local/bin/backup-sandstorm mode=a+x
+  template:
+    src=backup-sandstorm.j2
+    dest=/usr/local/bin/backup-sandstorm
+    mode=0700
 
 - name: add crontab entry for duplicity
   cron:
