@@ -6,6 +6,9 @@ export SIGN_PASSPHRASE=MOARTRASH
 
 export FTP_PASSWORD="{{ backup_target_password }}"
 
+# Start sandstorm again once we're done... no matter what happens
+trap 'echo "Starting sandstorm..."; systemctl start sandstorm' EXIT
+
 echo 'Stopping sandstorm...'
 systemctl stop sandstorm
 
@@ -26,6 +29,3 @@ duplicity remove-older-than {{ backup_max_age }} {{ backup_target }} \
   --sign-key={{ backup_signing_key_id }} \
   --archive-dir /var/duplicity-archive \
   --gpg-options '--trust-model=always --homedir=/var/gpg'
-
-echo 'Starting sandstorm...'
-systemctl start sandstorm
