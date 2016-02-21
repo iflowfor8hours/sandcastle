@@ -42,6 +42,10 @@ Role Variables
 * **ssl_certificate_key_path**: path provided to the nginx ssl_certificate_key config value
 * **ssl_trusted_certificate_path**: path provided to the nginx ssl_trusted_certificate config value
 
+See the [nginx configuration
+docs](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate)
+for details on the SSL fields.
+
 ### Backups
 
 * **backup_target**: backup target for `duplicity` (see the [duplicity
@@ -51,6 +55,11 @@ Role Variables
 * **backup_signing_key_id**: the key id of the gpg key to use to sign backups
 * **backup_hour**: hour of the day to run the backup
 * **backup_minute**: minute of the hour to run the backup
+* **backup_max_age**: delete backups older than this. a full
+  backup will also be performed at this interval to insure that
+  files older than this are not kept around due to subsequent
+  incremental backups. see the `TIME FORMATS` section of `man
+  duplicity` for documentation on the format
 
 See `test/gen-duplicity-keys.sh` for an example of generating the backup keys.
 
@@ -66,9 +75,6 @@ See `test/gen-duplicity-keys.sh` for an example of generating the backup keys.
   the Sandstorm hidden service is enabled DNS queries are routed through Tor,
   which does not return MX records. 
 
-See the [nginx configuration
-docs](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate)
-for details on the SSL fields.
 
 Dependencies
 ------------

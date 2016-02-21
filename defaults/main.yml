@@ -38,3 +38,4 @@ fail2ban_config_jail_sshddos_enabled: yes
 backups: yes
 backup_hour: 23
 backup_minute: 0
+backup_max_age: '7D'
