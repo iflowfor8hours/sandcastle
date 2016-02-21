@@ -5,9 +5,6 @@
       - copy: src=test/sandstorm.crt dest=/etc/ssl/ssl_certificate.crt
       - copy: src=test/sandstorm.key dest=/etc/ssl/ssl_certificate.key
       - copy: src=test/rootCA.pem dest=/etc/ssl/rootCA.pem
-      - file: name="/var/gpg" state=directory
-      - copy: src=test/backup-encryption-public.key dest=/var/gpg
-      - copy: src=test/backup-signing-private.key dest=/var/gpg
   vars_files:
       - test/vars.yml
   roles:
@@ -24,3 +21,5 @@
       ssl_trusted_certificate_path: /etc/ssl/rootCA.pem
       backup_target: file:///tmp/backup
       backup_target_password: SUPERTRASH
+      backup_enc_pub_key_path: test/backup-encryption-public.key
+      backup_sig_priv_key_path: test/backup-signing-private.key

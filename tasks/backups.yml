@@ -22,13 +22,24 @@
     dest=/etc/duplicity/cacert.pem
     state=link
 
+- name: Copy backup encryption key
+  copy:
+    src={{ backup_enc_pub_key_path }}
+    dest=/var/gpg/backup-encryption-public.key
+
+- name: Copy backup signing key
+  copy:
+    src={{ backup_sig_priv_key_path }}
+    dest=/var/gpg/backup-signing-private.key
+
 - name: Check for backup encryption key
   command: gpg --homedir /var/gpg --list-keys {{backup_encryption_key_id}}
   ignore_errors: True
   become_user: root
   register: backup_encryption_key_exists
 
-- name: Import backup encryption key
+
+- name: Import backup encryption key into gpg database
   command: gpg --homedir /var/gpg --import /var/gpg/backup-encryption-public.key
   become_user: root
   when: not backup_encryption_key_exists.rc == 0
@@ -39,18 +50,18 @@
   become_user: root
   register: backup_signing_key_exists
 
-- name: Import signing key
+- name: Import signing key into gpg database
   command: gpg --homedir /var/gpg --import /var/gpg/backup-signing-private.key
   become_user: root
   when: not backup_signing_key_exists.rc == 0
 
-- name: add backup script
+- name: Add backup script
   template:
     src=backup-sandstorm.j2
     dest=/usr/local/bin/backup-sandstorm
     mode=0700
 
-- name: add crontab entry for duplicity
+- name: Add crontab entry for duplicity
   cron:
     name="backup sandstorm"
     hour={{backup_hour}}
