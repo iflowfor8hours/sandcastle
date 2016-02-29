@@ -14,3 +14,4 @@ dependencies:
   - jnv.unattended-upgrades
   - geerlingguy.firewall
   - hardening.os-hardening
+  - { role: debops.cryptsetup, tags: [ 'role::cryptsetup' ] }

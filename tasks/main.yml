@@ -26,10 +26,10 @@
 - include: needrestart.yml
   tags: needrestart
 
-- include: tor.yml
-  tags: tor
-  when: ssh_onion or sandstorm_onion
-
 - include: backups.yml
   tags: backups
   when: backups
+
+- include: tor.yml
+  tags: tor
+  when: ssh_onion or sandstorm_onion

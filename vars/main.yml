@@ -1,2 +1,10 @@
 ---
-# vars file for sandstorm-base
+
+cryptsetup_devices:
+  - name: 'sandstorm-data'
+    ciphertext_block_device: "{{ sandstorm_ciphertext_block_device }}"
+
+cryptsetup_use_random: False
+
+# milliseconds to spend stretching in PBKDF2
+cryptsetup_iter_time: 5000
