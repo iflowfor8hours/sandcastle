@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Charlie Austin, Matt Urbanski, Jack Singleton
+  author: Charlie Austin, Matt Urbanski, Jack Singleton, and Vladimir Zelmanov
   description: A secure by default Sandstorm installation
   license: MIT
   min_ansible_version: 1.9.4
