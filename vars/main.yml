@@ -1,10 +1,16 @@
 ---
+ramfs_path: "/mnt/keystore-ramdisk"
+ramfs_mode: "0600"
+
+cryptsetup_keyfile_remote_location: "{{ ramfs_path }}"
 
 cryptsetup_devices:
   - name: 'sandstorm-data'
     ciphertext_block_device: "{{ sandstorm_ciphertext_block_device }}"
 
+# use /dev/urandom: http://www.2uo.de/myths-about-urandom/
 cryptsetup_use_random: False
 
 # milliseconds to spend stretching in PBKDF2
 cryptsetup_iter_time: 5000
+
