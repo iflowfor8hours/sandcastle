@@ -90,7 +90,7 @@ See [test.yml](test.yml)
 
 You can see `test.yml` in action with Vagrant:
 
-* `ansible-galaxy install -r requirements.txt`
+* `ansible-galaxy install -r requirements.yml`
 * `./test/gen-duplicity-keys.sh`
 * `./test/gen-test-cert.sh`
 * Add `test/rootCA.pem` to your browsers trusted authorities list (**note!**

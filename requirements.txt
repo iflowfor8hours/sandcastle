@@ -1,5 +1,0 @@
-jnv.unattended-upgrades,v1.1.1
-geerlingguy.firewall,1.0.6
-hardening.os-hardening,2.0.0
-debops.cryptsetup,v0.2.1
-jacksingleton.ramfs
