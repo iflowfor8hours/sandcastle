@@ -33,3 +33,6 @@
 - include: tor.yml
   tags: tor
   when: ssh_onion or sandstorm_onion
+    
+- include: filebeat.yml
+  tags: filebeat

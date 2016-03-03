@@ -24,3 +24,14 @@
       backup_enc_pub_key_path: test/backup-encryption-public.key
       backup_sig_priv_key_path: test/backup-signing-private.key
       sandstorm_ciphertext_block_device: '/dev/loop0'
+      logstash_forwarder_ssl_certificate_file: test/logstash-forwarder.crt
+      logstash_ssl_dir: /etc/ssl/logstash
+      logstash_forwarder_files:
+        - paths:
+            - /opt/sandstorm/var/log/mongo.log
+            - /opt/sandstorm/var/log/sandstorm.log
+            - /opt/sandstorm/var/log/updater.log
+          fields:
+            type: apache
+      logstash_forwarder_logstash_server: 172.19.22.1
+      logstash_forwarder_logstash_server_port: 9200

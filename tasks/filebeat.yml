@@ -1,0 +1,15 @@
+---
+- name: Get filebeat
+  get_url: url=https://download.elastic.co/beats/filebeat/filebeat_1.1.2_amd64.deb dest=/tmp/filebeat_1.1.2_amd64.deb mode=0755
+
+- name: Install filebeat
+  apt: deb=/tmp/filebeat_1.1.2_amd64.deb
+
+- name: Configure filebeat
+  template: src=filebeat.yml.j2 dest=/etc/filebeat/filebeat.yml
+
+- name: reload filebeat
+  service: name=filebeat state=restarted
+
+#- name: load filebeat template into ES
+#  shell: curl -XPUT 'http://172.19.22.1:9200_template/filebeat?pretty' -d@/etc/filebeat/filebeat.template.json

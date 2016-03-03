@@ -1,0 +1,19 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - "/var/log/*.log"
+        - "/var/log/syslog"
+      document_type: syslog
+    -
+      paths:
+        - "/opt/sandstorm/var/log/mongo.log"
+      document_type: mongo
+    -
+      paths:
+        - "/opt/sandstorm/var/log/sandstorm.log"
+      document_type: sandstorm
+      
+output:
+  elasticsearch:
+     hosts: ["172.19.22.1:9200"]
