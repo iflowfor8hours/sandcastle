@@ -19,4 +19,4 @@ before_script:
 
 script:
   - ansible-playbook -i test/inventory test.yml --syntax-check
-  - ansible-playbook -i test/inventory test.yml --connection=local --sudo
+  - ansible-playbook -i test/inventory test.yml --connection=local --sudo --extra-vars "cryptsetup_devices: []" 
