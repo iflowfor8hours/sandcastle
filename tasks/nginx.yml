@@ -50,6 +50,12 @@
     dest: "/var/www/502.html"
     content: "502: oops, something went wrong"
 
+- name: filter nginx logs to remove IPs
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+  notify: restart nginx
+
 - name: configure nginx reverse proxy
   template:
     src: reverse_proxy.conf.j2

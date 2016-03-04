@@ -19,7 +19,7 @@ server {
   server_name {{ sandstorm_hostname }} {{ sandstorm_wildcard_host }};
 
   error_log /var/log/nginx/{{ sandstorm_hostname }}/error.log;
-  access_log /var/log/nginx/{{ sandstorm_hostname }}/access.log;
+  access_log /var/log/nginx/{{ sandstorm_hostname }}/access.log combined_anon;
 
   # https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=nginx-1.6.2&openssl=1.0.1k&hsts=yes&profile=modern
   # as of Oct 18 2015
