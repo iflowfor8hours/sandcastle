@@ -11,5 +11,9 @@ install:
   - pip install ansible
 
 before_script:
-  - echo localhost > inventory
+  - echo localhost > tests/inventory
   - ansible-galaxy install --role-file requirements.yml
+
+script:
+  - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
+  - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
