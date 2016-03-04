@@ -30,9 +30,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     sandstorm.vm.provision :ansible do |ansible|
       ansible.playbook = "test.yml"
-      # ansible.verbose = "vvvv"
-      ansible.tags = "filebeat"
       ansible.skip_tags = "ssh"
+      # ansible.verbose = "vvvv"
+      # ansible.tags = ""
     end
   end
 end

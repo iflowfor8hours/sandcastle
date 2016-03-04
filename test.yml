@@ -24,14 +24,23 @@
       backup_enc_pub_key_path: test/backup-encryption-public.key
       backup_sig_priv_key_path: test/backup-signing-private.key
       sandstorm_ciphertext_block_device: '/dev/loop0'
-      logstash_forwarder_ssl_certificate_file: test/logstash-forwarder.crt
-      logstash_ssl_dir: /etc/ssl/logstash
-      logstash_forwarder_files:
-        - paths:
-            - /opt/sandstorm/var/log/mongo.log
-            - /opt/sandstorm/var/log/sandstorm.log
-            - /opt/sandstorm/var/log/updater.log
-          fields:
-            type: apache
-      logstash_forwarder_logstash_server: 172.19.22.1
-      logstash_forwarder_logstash_server_port: 9200
+      filebeat_prospectors:
+        - path: "/opt/sandstorm/var/log/updater.log"
+          document_type: "updates"
+        - path: "/opt/sandstorm/var/log/mongo.log"
+          document_type: "mongo"
+        - path: "/var/log/syslog"
+          document_type: "syslog"
+        - path: "/var/log/auth.log"
+          document_type: "auth"
+        - path: "/var/log/nginx/*.log"
+          document_type: "nginx_landing"
+        - path: "/var/log/nginx/{{ sandstorm_hostname }}/*.log"
+          document_type: "reverse_proxy"
+      elasticsearch_addresses:
+        - 'http://172.19.22.1:9200'
+      filebeat_ssl_enabled: true
+      filebeat_certificate_path: test/filebeat.crt
+      filebeat_certificate_key_path: test/filebeat.key
+      filebeat_certificate_authorities:
+        - /etc/filebeat/ssl/filebeat.crt

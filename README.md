@@ -63,6 +63,20 @@ for details on the SSL fields.
 
 See `test/gen-duplicity-keys.sh` for an example of generating the backup keys.
 
+### Centralized logging
+* **elasticsearch_addresses**: A list of addresses to the ES clusters intended
+to receive logs. Can be specified as a URI or IP:PORT
+* **filebeat_prospectors**: A list of hashes containing the path to the file(s)
+to be logged, and the `document_type` for ES indexing
+* **filebeat_ssl_enabled**: enable ssl configuration for filebeat client; if
+this is set to false, the following variables are ignored
+* **filebeat_certificate_path**: certificate for TLS client authentication
+* **filebeat_certificate_key_path**: client Certificate Key
+* **filebeat_certificate_authorities**: list of root certificates for HTTPS
+server verifications
+
+See `test/gen-filebeat-keys.sh` for an example of generating the filebeat keys.
+
 ### Other
 
 * **firewall_allowed_tcp_ports**: defaults to `[80, 443]`. add
@@ -93,6 +107,7 @@ You can see `test.yml` in action with Vagrant:
 * `ansible-galaxy install -r requirements.yml`
 * `./test/gen-duplicity-keys.sh`
 * `./test/gen-test-cert.sh`
+* `./test/gen-filebeat-cert.sh`
 * Add `test/rootCA.pem` to your browsers trusted authorities list (**note!**
   while this is added to your browser anyone with access to rootCA.key will be
   able to compromise your TLS connections)

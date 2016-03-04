@@ -1,19 +1,23 @@
 filebeat:
   prospectors:
-    -
-      paths:
-        - "/var/log/*.log"
-        - "/var/log/syslog"
-      document_type: syslog
-    -
-      paths:
-        - "/opt/sandstorm/var/log/mongo.log"
-      document_type: mongo
-    -
-      paths:
-        - "/opt/sandstorm/var/log/sandstorm.log"
-      document_type: sandstorm
-      
+  {% for item in filebeat_prospectors -%}
+  -
+    paths:
+      - "{{ item.path }}"
+    document_type: {{ item.document_type }}
+  {% endfor %}
+
 output:
   elasticsearch:
-     hosts: ["172.19.22.1:9200"]
+    hosts: {{ elasticsearch_addresses | to_yaml }}
+    {% if filebeat_ssl_enabled -%}
+    protocol: https
+    tls:
+      certificate_authorities:
+        {{ filebeat_certificate_authorities | to_nice_yaml -}}
+    {% endif %}
+
+logging:
+  level: warning
+  to_files: true
+  to_syslog: false
