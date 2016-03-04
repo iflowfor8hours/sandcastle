@@ -7,7 +7,6 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq python-apt
   - sudo ./test/install-rng-tool.sh
-  - sudo ./test/create-loop0.sh
 
 install:
   - pip install ansible
@@ -20,4 +19,5 @@ before_script:
 
 script:
   - ansible-playbook -i test/inventory test.yml --syntax-check
+  - sudo ./test/create-loop0.sh
   - ansible-playbook -i test/inventory test.yml --connection=local --sudo
