@@ -13,6 +13,8 @@ install:
 before_script:
   - echo localhost > test/inventory
   - ansible-galaxy install --role-file requirements.yml
+  - ./test/gen-duplicity-keys.sh
+  - ./test/gen-test-cert.sh
 
 script:
   - ansible-playbook -i test/inventory test.yml --syntax-check
