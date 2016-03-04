@@ -1,0 +1,15 @@
+---
+sudo: true
+language: python
+python: "2.7"
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq python-apt
+
+install:
+  - pip install ansible
+
+before_script:
+  - echo localhost > inventory
+  - ansible-galaxy install --role-file requirements.yml
