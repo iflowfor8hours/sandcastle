@@ -16,7 +16,8 @@ before_script:
   - ansible-galaxy install --role-file requirements.yml
   - ./test/gen-duplicity-keys.sh
   - ./test/gen-test-cert.sh
+  - sudo ./test/create-loop0.sh
 
 script:
   - ansible-playbook -i test/inventory test.yml --syntax-check
-  - ansible-playbook -i test/inventory test.yml --connection=local --sudo --extra-vars "cryptsetup_devices: []" 
+  - ansible-playbook -i test/inventory test.yml --connection=local --sudo
