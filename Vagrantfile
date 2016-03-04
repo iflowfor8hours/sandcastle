@@ -35,4 +35,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # ansible.tags = ""
     end
   end
+
+  config.vm.define :elk do |elk|
+    elk.vm.provider "docker" do |d|
+      d.name = "homelessELK"
+      d.image =  "blacktop/elk"
+      d.ports = ['80:80', '9200:9200']
+      d.expose = [443, 9300]
+      d.remains_running = true
+    end
+  end
 end
