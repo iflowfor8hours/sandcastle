@@ -1,4 +1,7 @@
 ---
+- include: firewall-ipv6.yml
+  tags: firewall
+
 - include: fail2ban.yml
   tags: fail2ban
 
@@ -33,3 +36,6 @@
 - include: tor.yml
   tags: tor
   when: ssh_onion or sandstorm_onion
+    
+- include: filebeat.yml
+  tags: filebeat
