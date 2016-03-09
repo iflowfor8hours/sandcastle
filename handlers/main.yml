@@ -12,3 +12,7 @@
   service:
     name: fail2ban
     state: restarted
+- name: restart filebeat
+  service:
+    name: filebeat
+    state: restarted

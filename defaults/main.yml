@@ -43,3 +43,5 @@ backup_max_age: '7D'
 cryptsetup_devices:
  - name: 'sandstorm-data'
    ciphertext_block_device: "{{ sandstorm_ciphertext_block_device }}"
+
+filebeat_ssl_enabled: false

@@ -1,0 +1,42 @@
+---
+- name: Add filebeat repository key
+  apt_key:
+    url: https://packages.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add filebeat repository
+  apt_repository:
+    repo: "deb http://packages.elastic.co/beats/apt stable main"
+
+- name: Install filebeat
+  apt: pkg=filebeat
+
+- name: Create Filebeat ssl dir
+  file:
+    name="/etc/filebeat/ssl"
+    recurse=true
+    state=directory
+    owner=root
+    mode=0700
+  when: filebeat_ssl_enabled
+
+- name: Copy filebeat client certificate
+  copy:
+    src={{ filebeat_certificate_path }}
+    dest=/etc/filebeat/ssl/filebeat.crt
+  when: filebeat_ssl_enabled
+
+- name: Copy filebeat certificate key
+  copy:
+    src={{ filebeat_certificate_key_path }}
+    dest=/etc/filebeat/ssl/filebeat.key
+  when: filebeat_ssl_enabled
+
+- name: Configure filebeat
+  template:
+    src=filebeat.yml.j2
+    dest=/etc/filebeat/filebeat.yml
+  notify: restart filebeat
+
+#- name: load filebeat template into ES
+#  shell: curl -XPUT 'http://172.19.22.1:9200_template/filebeat?pretty' -d@/etc/filebeat/filebeat.template.json

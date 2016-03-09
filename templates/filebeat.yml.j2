@@ -1,0 +1,23 @@
+filebeat:
+  prospectors:
+  {% for item in filebeat_prospectors -%}
+  -
+    paths:
+      - "{{ item.path }}"
+    document_type: {{ item.document_type }}
+  {% endfor %}
+
+output:
+  elasticsearch:
+    hosts: {{ elasticsearch_addresses | to_yaml }}
+    {% if filebeat_ssl_enabled -%}
+    protocol: https
+    tls:
+      certificate_authorities:
+        {{ filebeat_certificate_authorities | to_nice_yaml -}}
+    {% endif %}
+
+logging:
+  level: warning
+  to_files: true
+  to_syslog: false
