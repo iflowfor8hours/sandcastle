@@ -17,6 +17,6 @@
 
 - name: Ensure the ipv6 firewall is enabled and will start on boot.
   service:
-    name: firewall
+    name: firewall-ipv6
     state:  started
     enabled:  yes

@@ -1,12 +1,12 @@
 #! /bin/sh
 # /etc/init.d/firewall-ipv6
 #
-# Firewall init script, to be used with /etc/firewall-ipv6.sh by Jeff Geerling.
+# Firewall init script, to be used with /etc/firewall-ipv6.sh
 #
 # @author Jeff Geerling
 
 ### BEGIN INIT INFO
-# Provides:          firewall
+# Provides:          firewall-ipv6
 # Required-Start:    $remote_fs $syslog
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 4 5
