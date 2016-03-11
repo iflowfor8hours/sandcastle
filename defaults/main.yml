@@ -39,7 +39,3 @@ backups: yes
 backup_hour: 23
 backup_minute: 0
 backup_max_age: '7D'
-
-cryptsetup_devices:
- - name: 'sandstorm-data'
-   ciphertext_block_device: "{{ sandstorm_ciphertext_block_device }}"
