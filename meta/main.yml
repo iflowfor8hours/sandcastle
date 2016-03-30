@@ -16,4 +16,3 @@ dependencies:
   - geerlingguy.firewall
   - hardening.os-hardening
   - jacksingleton.ramfs
-  - debops.cryptsetup

@@ -23,4 +23,5 @@
       backup_target_password: SUPERTRASH
       backup_enc_pub_key_path: test/backup-encryption-public.key
       backup_sig_priv_key_path: test/backup-signing-private.key
+    - role: debops.cryptsetup
       sandstorm_ciphertext_block_device: '/dev/loop0'
