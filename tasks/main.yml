@@ -33,6 +33,9 @@
   tags: backups
   when: backups
 
+- include: migrate-sandstorm-to-crypt.yml
+  tags: migrate-sandstorm-to-crypt
+
 - include: tor.yml
   tags: tor
   when: ssh_onion or sandstorm_onion

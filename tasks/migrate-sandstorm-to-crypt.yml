@@ -1,0 +1,32 @@
+---
+- name: Check to see if a crypt device is mounted
+  shell: '[ -d {{ cryptsetup_devices[0].mount }} ]'
+  ignore_errors: True
+  register: crypt_mounted
+
+- name: Check the target of /opt/sandstorm/var
+  shell: 'readlink -f /opt/sandstorm/var'
+  register: sandstorm_var_target
+
+- set_fact:
+    encrypted_var_path: "{{ cryptsetup_devices[0].mount }}/var"
+
+- set_fact:
+    is_crypt_mounted: "{{ crypt_mounted.rc == 0 }}"
+    is_var_encrypted: "{{ sandstorm_var_target.stdout == encrypted_var_path }}"
+
+- set_fact:
+    needs_migrate: "{{ is_crypt_mounted and not is_var_encrypted }}"
+
+- name: Move sandstorm data to crypt device
+  shell: "mv /opt/sandstorm/var {{ cryptsetup_devices[0].mount }}"
+  become: True
+  when: needs_migrate
+
+- name: Link /opt/sandstorm/var to the crypt mountpoint
+  file:
+    path: /opt/sandstorm/var
+    src: "{{ encrypted_var_path }}"
+    state: link
+  become: True
+  when: needs_migrate
