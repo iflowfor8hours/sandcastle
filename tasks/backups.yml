@@ -30,27 +30,17 @@
     - { src: "{{ backup_enc_key_path }}", dest: /var/gpg/backup-encryption.key }
     - { src: "{{ backup_sig_key_path }}", dest: /var/gpg/backup-signing.key }
 
-- name: Check for backup encryption key
-  command: gpg --homedir /var/gpg --list-keys {{backup_encryption_key_id}}
+- name: Clear gpg keys
+  shell: rm /var/gpg/*.gpg
   ignore_errors: True
-  become_user: root
-  register: backup_encryption_key_exists
 
 - name: Import backup encryption key into gpg database
   command: gpg --homedir /var/gpg --import /var/gpg/backup-encryption.key
   become_user: root
-  when: not backup_encryption_key_exists.rc == 0
-
-- name: Check for backup signing key
-  command: gpg --homedir /var/gpg --list-keys {{backup_signing_key_id}}
-  ignore_errors: True
-  become_user: root
-  register: backup_signing_key_exists
 
 - name: Import signing key into gpg database
   command: gpg --homedir /var/gpg --import /var/gpg/backup-signing.key
   become_user: root
-  when: not backup_signing_key_exists.rc == 0
 
 - name: Add backup script
   template:
