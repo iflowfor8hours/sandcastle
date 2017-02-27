@@ -44,6 +44,12 @@
   command: gpg --homedir /var/gpg --import /var/gpg/backup-signing.key
   become_user: root
 
+- name: Add known hosts entry for ssh backup server
+  become_user: root
+  known_hosts:
+    name: 199.119.112.17
+    key: "{{ backup_ssh_host_key }}"
+
 - name: Add backup script
   template:
     src=backup-sandstorm.j2
