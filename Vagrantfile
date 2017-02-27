@@ -24,6 +24,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     if [ ! -e "/dev/loop0" ]; then
       losetup /dev/loop0 /tmp/loop0-file
     fi
+
+    if [ ! -f "/tmp/loop1-file" ]; then
+      dd if=/dev/zero of=/tmp/loop1-file bs=1M count=1000
+    fi
+    if [ ! -e "/dev/loop1" ]; then
+      losetup /dev/loop1 /tmp/loop1-file
+    fi
   EOF
 
   config.vm.provision :ansible do |ansible|
