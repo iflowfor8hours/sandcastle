@@ -9,6 +9,7 @@
     - "/var/gpg"
     - "/var/duplicity-archive"
     - "/etc/duplicity"
+    - "/mnt/sandstorm-backup/sandstorm"
 
 - name: Install dependencies
   apt: name={{item}} state=present
@@ -22,13 +23,14 @@
     dest=/etc/duplicity/cacert.pem
     state=link
 
-- name: Copy backup gpg keys
+- name: Copy backup keys
   copy:
     src={{ item.src }}
     dest={{ item.dest }}
   with_items:
     - { src: "{{ backup_enc_key_path }}", dest: /var/gpg/backup-encryption.key }
     - { src: "{{ backup_sig_key_path }}", dest: /var/gpg/backup-signing.key }
+    - { src: "{{ backup_ssh_key_path }}", dest: /var/gpg/backup-ssh-key }
 
 - name: Clear gpg keys
   shell: rm /var/gpg/*.gpg

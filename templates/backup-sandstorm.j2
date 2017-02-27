@@ -7,10 +7,16 @@ export SIGN_PASSPHRASE=MOARTRASH
 export FTP_PASSWORD="{{ backup_target_password }}"
 
 # Start sandstorm again once we're done... no matter what happens
-trap 'echo "Starting sandstorm..."; systemctl start sandstorm' EXIT
+trap 'echo "Ensure sandstorm is running..."; systemctl start sandstorm' EXIT
 
 echo 'Stopping sandstorm...'
 systemctl stop sandstorm
+
+echo 'Taking snapshot...'
+rsync -a --delete /opt/sandstorm/ /mnt/sandstorm-backup/sandstorm
+
+echo 'Starting sandstorm...'
+systemctl start sandstorm
 
 echo 'Making backup...'
 duplicity /opt/sandstorm/ {{ backup_target }} \
@@ -19,7 +25,9 @@ duplicity /opt/sandstorm/ {{ backup_target }} \
   --encrypt-key={{ backup_encryption_key_id }} \
   --sign-key={{ backup_signing_key_id }} \
   --archive-dir /var/duplicity-archive \
-  --gpg-options '--trust-model=always --homedir=/var/gpg'
+  --gpg-options '--trust-model=always --homedir=/var/gpg' \
+  --ssh-backend=pexpect \
+  --scp-command "scp -i/var/gpg/backup-ssh-key"
 
 echo 'Deleting old backups'
 duplicity remove-older-than {{ backup_max_age }} {{ backup_target }} \
@@ -28,4 +36,6 @@ duplicity remove-older-than {{ backup_max_age }} {{ backup_target }} \
   --encrypt-key={{ backup_encryption_key_id }} \
   --sign-key={{ backup_signing_key_id }} \
   --archive-dir /var/duplicity-archive \
-  --gpg-options '--trust-model=always --homedir=/var/gpg'
+  --gpg-options '--trust-model=always --homedir=/var/gpg' \
+  --ssh-backend=pexpect \
+  --scp-command "scp -i/var/gpg/backup-ssh-key"
