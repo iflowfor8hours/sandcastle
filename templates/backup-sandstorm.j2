@@ -25,9 +25,9 @@ duplicity /opt/sandstorm/ {{ backup_target }} \
   --encrypt-key={{ backup_encryption_key_id }} \
   --sign-key={{ backup_signing_key_id }} \
   --archive-dir /var/duplicity-archive \
-  --gpg-options '--trust-model=always --homedir=/var/gpg' \
+  --gpg-options '--trust-model=always --homedir=/etc/duplicity' \
   --ssh-backend=pexpect \
-  --ssh-options "-i/var/gpg/backup-ssh-key"
+  --ssh-options "-i/etc/duplicity/backup-ssh-key"
 
 echo 'Deleting old backups'
 duplicity remove-older-than {{ backup_max_age }} {{ backup_target }} \
@@ -36,6 +36,6 @@ duplicity remove-older-than {{ backup_max_age }} {{ backup_target }} \
   --encrypt-key={{ backup_encryption_key_id }} \
   --sign-key={{ backup_signing_key_id }} \
   --archive-dir /var/duplicity-archive \
-  --gpg-options '--trust-model=always --homedir=/var/gpg' \
+  --gpg-options '--trust-model=always --homedir=/etc/duplicity' \
   --ssh-backend=pexpect \
-  --ssh-options "-i/var/gpg/backup-ssh-key"
+  --ssh-options "-i/etc/duplicity/backup-ssh-key"

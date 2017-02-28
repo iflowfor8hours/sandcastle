@@ -1,4 +1,7 @@
 ---
+- name: Remove /etc/duplicity that we used to use for storing duplicity keys
+  file: name="/etc/duplicity" state="absent"
+
 - name: Create duplicity directories
   file:
     name="{{item}}"
@@ -6,7 +9,6 @@
     owner=root
     mode=0700
   with_items:
-    - "/var/gpg"
     - "/var/duplicity-archive"
     - "/etc/duplicity"
     - "/mnt/sandstorm-backup/sandstorm"
@@ -30,26 +32,26 @@
     dest={{ item.dest }}
     mode=0600
   with_items:
-    - { src: "{{ backup_enc_key_path }}", dest: /var/gpg/backup-encryption.key }
-    - { src: "{{ backup_sig_key_path }}", dest: /var/gpg/backup-signing.key }
+    - { src: "{{ backup_enc_key_path }}", dest: /etc/duplicity/backup-encryption.key }
+    - { src: "{{ backup_sig_key_path }}", dest: /etc/duplicity/backup-signing.key }
 
 - name: Copy backup ssh key
   copy:
     src="{{ backup_ssh_key_path }}"
-    dest=/var/gpg/backup-ssh-key
+    dest=/etc/duplicity/backup-ssh-key
     mode=0600
   when: backup_ssh_key_path is defined
     
 - name: Clear gpg keys
-  shell: rm /var/gpg/*.gpg
+  shell: rm /etc/duplicity/*.gpg
   ignore_errors: True
 
 - name: Import backup encryption key into gpg database
-  command: gpg --homedir /var/gpg --import /var/gpg/backup-encryption.key
+  command: gpg --homedir /etc/duplicity --import /etc/duplicity/backup-encryption.key
   become_user: root
 
 - name: Import signing key into gpg database
-  command: gpg --homedir /var/gpg --import /var/gpg/backup-signing.key
+  command: gpg --homedir /etc/duplicity --import /etc/duplicity/backup-signing.key
   become_user: root
 
 - name: Ensure we have a ~/.ssh directory
