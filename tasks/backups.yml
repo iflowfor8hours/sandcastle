@@ -1,6 +1,6 @@
 ---
-- name: Remove /etc/duplicity that we used to use for storing duplicity keys
-  file: name="/etc/duplicity" state="absent"
+- name: Remove /var/gpg that we used to use for storing duplicity keys
+  file: name="/var/gpg" state="absent"
 
 - name: Create duplicity directories
   file:
