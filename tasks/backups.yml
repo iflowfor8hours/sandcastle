@@ -28,6 +28,7 @@
   copy:
     src={{ item.src }}
     dest={{ item.dest }}
+    mode=0600
   with_items:
     - { src: "{{ backup_enc_key_path }}", dest: /var/gpg/backup-encryption.key }
     - { src: "{{ backup_sig_key_path }}", dest: /var/gpg/backup-signing.key }
