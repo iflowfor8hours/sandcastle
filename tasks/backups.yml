@@ -24,7 +24,7 @@
     dest=/etc/duplicity/cacert.pem
     state=link
 
-- name: Copy backup keys
+- name: Copy backup gpg keys
   copy:
     src={{ item.src }}
     dest={{ item.dest }}
@@ -32,8 +32,14 @@
   with_items:
     - { src: "{{ backup_enc_key_path }}", dest: /var/gpg/backup-encryption.key }
     - { src: "{{ backup_sig_key_path }}", dest: /var/gpg/backup-signing.key }
-    - { src: "{{ backup_ssh_key_path }}", dest: /var/gpg/backup-ssh-key }
 
+- name: Copy backup ssh key
+  copy:
+    src="{{ backup_ssh_key_path }}"
+    dest=/var/gpg/backup-ssh-key
+    mode=0600
+  when: backup_ssh_key_path is defined
+    
 - name: Clear gpg keys
   shell: rm /var/gpg/*.gpg
   ignore_errors: True
@@ -57,8 +63,9 @@
 - name: Add known hosts entry for ssh backup server
   become_user: root
   known_hosts:
-    name: 199.119.112.17
-    key: "{{ backup_ssh_host_key }}"
+    name: "{{ backup_ssh_host_name }}"
+    key: "{{ lookup('file', backup_ssh_host_key_path) }}"
+  when: backup_ssh_host_name is defined and backup_ssh_host_key_path is defined
 
 - name: Add backup script
   template:

@@ -51,13 +51,6 @@ for details on the SSL fields.
 * **backup_target**: backup target for `duplicity` (see the [duplicity
   docs](http://duplicity.nongnu.org/duplicity.1.html#sect7))
 * **backup_target_password**: if your backup target needs a password
-* **backup_ssh_key_path**: if your backup target requires ssh access (like scp or sftp)
-* **backup_ssh_host_key**: will be added to known_hosts to identify
-  the backup server correctly. also only needed for targets that
-  require ssh access. you can generate this with `ssh-keyscan -H
-  your-backup-server.net`, but be sure to check the key you use
-  corresponds with the actual value on your server (in
-  /etc/ssh/*.pub)!
 * **backup_enc_key_path**: local path of a gpg key to use for encrypting backups
 * **backup_sig_key_path**: local path of a gpg key to use for signing backups
 * **backup_encryption_key_id**: the key id of the gpg key to use to encrypt backups
@@ -71,6 +64,18 @@ for details on the SSL fields.
   duplicity` for documentation on the format
 
 See `test/gen-duplicity-keys.sh` for an example of generating the backup keys.
+
+If your backup target uses the scp or sftp targets, the following
+parameters are needed to configure ssh auth:
+
+* **backup_ssh_key_path**: path to an ssh private key
+* **backup_ssh_host_name**: hostname of the server, for known_hosts config
+* **backup_ssh_host_key_path**: will be added to known_hosts to identify
+  the backup server correctly. also only needed for targets that
+  require ssh access. you can generate this with `ssh-keyscan -H
+  your-backup-server.net`, but be sure to check the key you use
+  corresponds with the actual value on your server (in
+  /etc/ssh/*.pub)!
 
 ### Other
 
