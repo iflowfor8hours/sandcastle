@@ -44,6 +44,14 @@
   command: gpg --homedir /var/gpg --import /var/gpg/backup-signing.key
   become_user: root
 
+- name: Ensure we have a ~/.ssh directory
+  become_user: root
+  file:
+    name="/root/.ssh"
+    state=directory
+    owner=root
+    mode=0700
+
 - name: Add known hosts entry for ssh backup server
   become_user: root
   known_hosts:
