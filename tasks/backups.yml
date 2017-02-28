@@ -16,6 +16,7 @@
   with_items:
     - gnupg
     - duplicity
+    - rsync
 
 - name: Give duplicity ssl certificates to trust
   file:
