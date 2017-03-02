@@ -79,7 +79,7 @@ parameters are needed to configure ssh auth:
 
 ### Other
 
-* **firewall_allowed_tcp_ports**: defaults to `[80, 443]`. add
+* **open_ports**: list of open tcp ports. defaults to `[80, 443]`. add
   `22` if you want to ssh directly instead of through Tor
 
 * **enable_mta**: defaults to `"false"`, set to true to install

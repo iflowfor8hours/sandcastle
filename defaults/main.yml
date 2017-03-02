@@ -15,9 +15,15 @@ enable_mta: false
 
 ssh_hostkey_path: /etc/ssh/ssh_host_good_mode_key
 
-firewall_allowed_tcp_ports:
+open_ports:
   - 80
   - 443
+  
+default_firewall_ip6_additional_rules:
+- "ip6tables -F"
+- "ip6tables -A INPUT -i lo -j ACCEPT"
+- "ip6tables -A OUTPUT -o lo -j ACCEPT"
+- "ip6tables -A INPUT -j REJECT --reject-with icmp6-adm-prohibited"
 
 tor_isolate_dns: "{{sandstorm_onion}}"
 

@@ -2,9 +2,6 @@
 - include: apt-transport-https.yml
   tags: apt-transport-https
 
-- include: firewall-ipv6.yml
-  tags: firewall
-
 - include: fail2ban.yml
   tags: fail2ban
 

@@ -11,7 +11,7 @@
     - role: sandcastle
       sandstorm_dev_accounts: "yes"
       ssh_debug: true
-      firewall_allowed_tcp_ports:
+      open_ports:
         - 22
         - 80
         - 443

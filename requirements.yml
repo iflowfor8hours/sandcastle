@@ -2,7 +2,7 @@
   version: v1.1.1
 
 - src: geerlingguy.firewall
-  version: 1.0.9
+  version: 2.0.1
 
 - src: https://github.com/hardening-io/ansible-os-hardening
   name: hardening.os-hardening
