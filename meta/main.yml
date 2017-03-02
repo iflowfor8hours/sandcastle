@@ -12,7 +12,16 @@ galaxy_info:
   - web
 
 dependencies:
-  - jnv.unattended-upgrades
-  - geerlingguy.firewall
-  - hardening.os-hardening
-  - jacksingleton.ramfs
+  - src: jnv.unattended-upgrades
+    version: v1.1.1
+
+  - src: geerlingguy.firewall
+    version: 1.0.9
+
+  - src: https://github.com/hardening-io/ansible-os-hardening
+    name: hardening.os-hardening
+
+  - src: debops.cryptsetup
+    version: v0.2.1
+
+  - src: jacksingleton.ramfs
