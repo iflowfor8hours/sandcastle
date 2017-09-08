@@ -6,6 +6,7 @@
 
 - src: https://github.com/hardening-io/ansible-os-hardening
   name: hardening.os-hardening
+  version: 3.0.0
 
 - src: debops.cryptsetup
   version: v0.2.1
