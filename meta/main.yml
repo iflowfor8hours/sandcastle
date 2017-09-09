@@ -13,12 +13,17 @@ galaxy_info:
 
 dependencies:
   - role: jnv.unattended-upgrades
+    version: v1.1.1
     tags: unattended-upgrades
   - role: geerlingguy.firewall
+    version: 2.0.1
     tags: "firewall"
     firewall_ip6_additional_rules: "{{ default_firewall_ip6_additional_rules }}"
     firewall_allowed_tcp_ports: "{{ open_ports }}"
   - role: hardening.os-hardening
+    version: 3.0.0
     tags: os-hardening
   - role: jacksingleton.ramfs
     tags: ramfs
+  - role: debops.cryptsetup
+    version: v0.2.1
